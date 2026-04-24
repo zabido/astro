@@ -29,10 +29,27 @@ A collection of Python and PowerShell tools designed to automate astrophotograph
 
 ---
 
+### [fitsheader.py](fitsheader.py)
+**Description:** A metadata extraction tool for FITS files. It reads the primary header of a FITS image and saves all the technical information (EXPTIME, GAIN, DATE, etc.) into a plain text file (.txt) with the same name as the source.
+
+**Usage Mode:** Command-line argument.
+
+* **Prerequisites:** * Python library: `pip install astropy`
+* **How to run:**
+    ```powershell
+    python fitsheader.py "C:\path\to\your\image.fits"
+    ```
+* **What it does:** 1. Opens the specified `.fits` file.
+    2. Reads the primary header index.
+    3. Creates a new `.txt` file in the same folder (e.g., `image.txt`).
+    4. Writes all header keys and values into the text file for easy review.
+
+---
+
 ## Other Scripts in this Repository
 
 ### Python Tools 🐍
-* **fitsheader.py**: Extracts and displays metadata information from FITS file headers.
+
 * **list_objects_from_fits.py**: Scans FITS files and lists identified celestial objects.
 * **moonscale-fits-to-png.py**: Converts FITS to PNG with optimized scaling for lunar imaging.
 * **remove_spots.py**: Image processing script for cleaning artifacts or hot pixels.
