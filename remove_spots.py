@@ -17,24 +17,20 @@ def process_image(input_path):
 
     print(f"Feldolgozás alatt: {input_path}...")
 
-    # 3. Maszk készítése a sötét foltokhoz
-    # Átalakítás szürkeárnyalatossá a detektáláshoz
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    
-    # Küszöbérték (Threshold): A 15-nél sötétebb pixeleket keressük (0 a full fekete)
-    # Ezt az értéket finomíthatod, ha túl sokat vagy túl keveset jelöl ki
-    _, mask = cv2.threshold(gray, 15, 255, cv2.THRESH_BINARY_INV)
+    # 3. Érzékenyebb küszöbérték (Threshold)
+    # Megemeljük 15-ről 30-ra, hogy a szürkébb foltokat is elkapja
+    _, mask = cv2.threshold(gray, 30, 255, cv2.THRESH_BINARY_INV)
 
-    # 4. A maszk finomítása (Dilatáció)
-    # Ez a "feathering" és a szélek lefedése miatt kell. 
-    # Megnöveljük a kijelölt foltokat 2-3 pixellel minden irányba.
-    kernel = np.ones((5,5), np.uint8)
-    mask = cv2.dilate(mask, kernel, iterations=1)
+    # 4. Erősebb tágítás (Dilatáció)
+    # Növeljük a kernel méretét és az ismétlésszámot, 
+    # hogy a maszk biztosan túlnyúljon a folt elmosódott szélén is.
+    kernel = np.ones((7,7), np.uint8)
+    mask = cv2.dilate(mask, kernel, iterations=2)
 
-    # 5. Inpainting (A foltok eltüntetése)
-    # Az algoritmus a környező (nem maszkolt) területekről mintát vesz
-    # és folytonosan kitölti a lyukakat.
-    result = cv2.inpaint(img, mask, inpaintRadius=5, flags=cv2.INPAINT_TELEA)
+    # 5. Inpainting sugár növelése
+    # Az inpaintRadius 5-ről 10-re emelése segít, hogy távolabbról 
+    # vegyen tiszta mintát a kitöltéshez.
+    result = cv2.inpaint(img, mask, inpaintRadius=10, flags=cv2.INPAINT_TELEA)
 
     # 6. Mentési útvonal generálása
     file_name, file_ext = os.path.splitext(input_path)
