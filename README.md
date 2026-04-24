@@ -46,11 +46,31 @@ A collection of Python and PowerShell tools designed to automate astrophotograph
 
 ---
 
+### [list_objects_from_fits.py](list_objects_from_fits.py)
+**Description:** An advanced astronomical identification tool. It reads the WCS (World Coordinate System) coordinates from a solved FITS file and queries the **SIMBAD** professional database to identify deep-sky objects (primarily galaxies) within the image's field of view. It filters results by magnitude and type, and calculates physical properties like distance (in millions of light-years) and actual size (in light-years).
+
+**Usage Mode:** Command-line argument.
+
+* **Prerequisites:** * Python libraries: `pip install numpy astropy astroquery`
+    * An **internet connection** is required for the SIMBAD database query.
+    * The input FITS file **must be plate-solved** (contain WCS headers).
+* **How to run:**
+    ```powershell
+    python list_objects_from_fits.py "C:\path\to\solved_image.fits"
+    ```
+* **What it does:**
+    1. Calculates the center and radius of your image in sky coordinates.
+    2. Downloads object data (magnitude, type, distance, dimensions) from SIMBAD.
+    3. Filters for galaxies and objects brighter than Mag 16.0.
+    4. Calculates absolute magnitude and real-world size in light-years.
+    5. Saves a formatted report (e.g., `galaxy_list.txt`) with a sorted table of all identified objects.
+
+---
+
 ## Other Scripts in this Repository
 
 ### Python Tools 🐍
 
-* **list_objects_from_fits.py**: Scans FITS files and lists identified celestial objects.
 * **moonscale-fits-to-png.py**: Converts FITS to PNG with optimized scaling for lunar imaging.
 * **remove_spots.py**: Image processing script for cleaning artifacts or hot pixels.
 
