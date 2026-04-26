@@ -94,7 +94,29 @@ A collection of Python and PowerShell tools designed to automate astrophotograph
 * **remove_spots.py**: Image processing script for cleaning artifacts or hot pixels.
 
 ### PowerShell Scripts 🐚
-* **graxpert-BE.ps1**: Automates background extraction using GraXpert.
+
+### [graxpert-BE.ps1](graxpert-BE.ps1)
+**Description:** A powerful PowerShell automation script for batch processing FITS files through **GraXpert CLI**. It performs automatic Background Extraction (BE) to remove light pollution and gradients from multiple images without manual intervention. It includes a real-time monitoring loop that tracks the system resources (CPU/RAM) used by GraXpert during processing.
+
+**Usage Mode:** Internal Path Configuration (requires editing the script).
+
+* **Prerequisites:** * **GraXpert** must be installed on your system.
+    * PowerShell execution policy must allow local scripts (`Set-ExecutionPolicy RemoteSigned`).
+* **Configuration:** Before running, open the script and update these variables to match your system:
+    * `$GraXpertPath`: Path to your `GraXpert.exe`.
+    * `$SourceDirectory`: The folder containing your raw/stacked `.fit` files.
+    * `$DestinationDirectory`: Where the cleaned images should be saved.
+* **How to run:**
+    1. Open PowerShell in the script's folder.
+    2. Run it by typing: `.\graxpert-BE.ps1`
+* **Key Features:**
+    * **Batch Processing:** Handles all `.fit` files in a folder automatically.
+    * **Smart Skip:** Skips files that have already been processed to save time.
+    * **Active Monitoring:** Displays live CPU and Memory usage during the extraction process.
+    * **Robust Paths:** Uses quoted paths and UTF-8 encoding to prevent errors with special characters.
+
+---
+
 * **gx-dn-iterative-monitor.ps1**: Monitoring script for GraXpert Denoise operations.
 * **NINA_Light-to_lights.ps1**: Standardizes N.I.N.A. "Light" folder naming.
 * **Seestar_sub_organizer-lights-deljpg.ps1**: Organizes Seestar sub-exposures and cleans up JPEGs.
