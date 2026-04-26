@@ -117,7 +117,28 @@ A collection of Python and PowerShell tools designed to automate astrophotograph
 
 ---
 
-* **gx-dn-iterative-monitor.ps1**: Monitoring script for GraXpert Denoise operations.
+### [gx-dn-iterative-monitor.ps1](gx-dn-iterative-monitor.ps1)
+**Description:** A dedicated batch processing script for **GraXpert AI Denoising**. It takes images (usually after background extraction) and applies the AI denoise algorithm to all files in a folder. Like its sister script, it features a real-time system resource monitor to track the heavy lifting performed by the AI model.
+
+**Usage Mode:** Internal Path Configuration.
+
+* **Prerequisites:** * **GraXpert** installed.
+    * PowerShell execution policy set to `RemoteSigned`.
+* **Configuration:** Edit these variables in the script:
+    * `$GraXpertPath`: Path to your `GraXpert.exe`.
+    * `$SourceDir`: The directory with your images (e.g., the `gxb` output from the previous step).
+    * `$DestinationDir`: Automatically creates a `gxd` subfolder by default.
+* **How to run:**
+    1. Navigate to the script's folder in PowerShell.
+    2. Execute: `.\gx-dn-iterative-monitor.ps1`
+* **Key Features:**
+    * **AI Denoising:** Automates the `-cmd denoising` GraXpert command.
+    * **Subfolder Management:** Automatically organizes results into a separate `gxd` folder.
+    * **Resource Tracking:** Monitor CPU and RAM usage while the AI model is running.
+    * **Safe Processing:** Includes file verification and error handling for failed processes.
+
+---
+
 * **NINA_Light-to_lights.ps1**: Standardizes N.I.N.A. "Light" folder naming.
 * **Seestar_sub_organizer-lights-deljpg.ps1**: Organizes Seestar sub-exposures and cleans up JPEGs.
 
