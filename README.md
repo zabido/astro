@@ -67,11 +67,30 @@ A collection of Python and PowerShell tools designed to automate astrophotograph
 
 ---
 
+### [moonscale-fits-to-png.py](moonscale-fits-to-png.py)
+**Description:** A visualization tool that adds a "Lunar Scale" to your astronomical images. It reads the pixel scale from the FITS header, calculates how many pixels wide the Moon (approx. 0.5 degrees) would be at that resolution, and draws a calibrated scale bar onto the image. It also performs an automatic 0.5% - 99.5% percentile stretch to ensure the resulting PNG looks great.
+
+**Usage Mode:** Command-line argument.
+
+* **Prerequisites:** * Python libraries: `pip install numpy astropy opencv-python`
+    * The FITS file **must be plate-solved** (contain CDELT or CD matrix headers).
+* **How to run:**
+    ```powershell
+    python moonscale-fits-to-png.py "C:\path\to\solved_image.fits"
+    ```
+* **Key Features:**
+    1. **Auto-Stretch:** Automatically brightens the image for preview purposes.
+    2. **Smart Scaling:** Uses the 30 arcminute standard for the Moon's diameter.
+    3. **I-Beam Scale:** Draws a professional-looking scale bar with ticks and text in the bottom right corner.
+    4. **Universal Encoding:** Uses a buffer-based saving method to support file paths with special/accented characters.
+    5. **Output:** Saves a new file with the `_MSL.png` suffix (e.g., `M31_MSL.png`).
+
+---
+
 ## Other Scripts in this Repository
 
 ### Python Tools 🐍
 
-* **moonscale-fits-to-png.py**: Converts FITS to PNG with optimized scaling for lunar imaging.
 * **remove_spots.py**: Image processing script for cleaning artifacts or hot pixels.
 
 ### PowerShell Scripts 🐚
